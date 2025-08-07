@@ -38,6 +38,11 @@ app.post('/increment', async (req, res) => {
   }
 });
 
+app.get('/', (req, res) => {
+  res.send('Backend OmniaFitnessCenter funcionando!');
+});
+
+
 app.listen(port, () => {
   console.log(`Servidor escuchando en http://localhost:${port}`);
 });
