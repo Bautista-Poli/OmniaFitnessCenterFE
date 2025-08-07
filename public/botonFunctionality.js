@@ -4,7 +4,7 @@ const countDisplay = document.getElementById('click-count');
 // Cargar el valor actual sin incrementarlo
 async function getCurrentCount() {
   try {
-    const response = await fetch('/count');
+    const response = await fetch('https://omniafitnesscenter.up.railway.app/count');
     const data = await response.json();
     countDisplay.textContent = `Contador: ${data.value}`;
   } catch (err) {
@@ -16,9 +16,10 @@ async function getCurrentCount() {
 // Sumar 1 al contador
 async function incrementCount() {
   try {
-    const response = await fetch('/increment', {
-      method: 'POST',
+    const response = await fetch('https://omniafitnesscenter.up.railway.app/increment', {
+    method: 'POST',
     });
+
     const data = await response.json();
     countDisplay.textContent = `Contador: ${data.value}`;
   } catch (err) {
