@@ -5,7 +5,7 @@ const countDisplay = document.getElementById('click-count');
 
 async function updateCount() {
   try {
-    const response = await fetch('http://localhost:3000/increment', {
+    const response = await fetch('/increment', {
       method: 'POST',
     });
     const data = await response.json();

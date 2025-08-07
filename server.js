@@ -19,6 +19,18 @@ const pool = new Pool({
   }
 });
 
+const path = require('path');
+
+// Servir archivos estáticos desde la carpeta 'public' (o el nombre que estés usando)
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Ruta por defecto: servir index.html si existe
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+
+
 // Ruta para incrementar el valor
 app.post('/increment', async (req, res) => {
   try {
@@ -36,10 +48,6 @@ app.post('/increment', async (req, res) => {
     console.error(err);
     res.status(500).json({ error: 'Error incrementando el valor' });
   }
-});
-
-app.get('/', (req, res) => {
-  res.send('Backend OmniaFitnessCenter funcionando!');
 });
 
 
