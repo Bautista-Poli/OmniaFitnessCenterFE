@@ -1,9 +1,20 @@
-// script.js
-
 const button = document.getElementById('click-button');
 const countDisplay = document.getElementById('click-count');
 
-async function updateCount() {
+// Cargar el valor actual sin incrementarlo
+async function getCurrentCount() {
+  try {
+    const response = await fetch('/count');
+    const data = await response.json();
+    countDisplay.textContent = `Contador: ${data.value}`;
+  } catch (err) {
+    countDisplay.textContent = 'Error al cargar';
+    console.error(err);
+  }
+}
+
+// Sumar 1 al contador
+async function incrementCount() {
   try {
     const response = await fetch('/increment', {
       method: 'POST',
@@ -16,7 +27,8 @@ async function updateCount() {
   }
 }
 
-button.addEventListener('click', updateCount);
+button.addEventListener('click', incrementCount);
 
-// Llamar al cargar la página
-updateCount();
+// Al cargar la página, solo mostrar el valor actual
+getCurrentCount();
+

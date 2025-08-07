@@ -54,3 +54,17 @@ app.post('/increment', async (req, res) => {
 app.listen(port, () => {
   console.log(`Servidor escuchando en http://localhost:${port}`);
 });
+
+// Nueva ruta: obtener el valor actual sin incrementarlo
+app.get('/count', async (req, res) => {
+  try {
+    const id = 1;
+    const result = await pool.query(`
+      SELECT value FROM playing_with_neon WHERE id = $1
+    `, [id]);
+    res.json({ value: result.rows[0].value });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error obteniendo el valor' });
+  }
+});
